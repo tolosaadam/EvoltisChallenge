@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35806.99 d17.13
+VisualStudioVersion = 17.12.35527.113 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "technical-tests-backend-ssr", "technical-tests-backend-ssr.csproj", "{32391E4A-58DF-4C20-BCE7-62B55764B300}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvoltisChallenge.Api", "EvoltisChallenge.Api\EvoltisChallenge.Api.csproj", "{53A68038-5159-4ECA-AF2F-F45BFAC8DB5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{32391E4A-58DF-4C20-BCE7-62B55764B300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{32391E4A-58DF-4C20-BCE7-62B55764B300}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{32391E4A-58DF-4C20-BCE7-62B55764B300}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{32391E4A-58DF-4C20-BCE7-62B55764B300}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53A68038-5159-4ECA-AF2F-F45BFAC8DB5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53A68038-5159-4ECA-AF2F-F45BFAC8DB5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53A68038-5159-4ECA-AF2F-F45BFAC8DB5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53A68038-5159-4ECA-AF2F-F45BFAC8DB5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {19769255-9BAA-4F05-A27D-8FD181E9D46A}
 	EndGlobalSection
 EndGlobal

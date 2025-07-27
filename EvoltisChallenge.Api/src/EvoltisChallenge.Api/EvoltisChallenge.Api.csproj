@@ -7,8 +7,31 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include=".EndpointsDefinitions\ProductCategory\Endpoints.cs" />
+    <Compile Include=".EndpointsDefinitions\ProductCategory\ProductCategoryAppExtensions.cs" />
+    <Compile Include=".EndpointsDefinitions\Product\Endpoints.cs" />
+    <Compile Include=".EndpointsDefinitions\Product\ProductAppExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="15.0.1" />
+    <PackageReference Include="FluentValidation" Version="12.0.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
+    <PackageReference Include="MediatR" Version="13.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.7" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Requests\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EvoltisChallenge.Api.Application.Interfaces\EvoltisChallenge.Api.Application.Interfaces.csproj" />
+    <ProjectReference Include="..\EvoltisChallenge.Api.Application\EvoltisChallenge.Api.Application.csproj" />
+    <ProjectReference Include="..\EvoltisChallenge.Api.Domain\EvoltisChallenge.Api.Domain.csproj" />
+    <ProjectReference Include="..\EvoltisChallenge.Api.Infraestructure.Repositories.MySql\EvoltisChallenge.Api.Infraestructure.Repositories.Ef.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,33 +7,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
-namespace EvoltisChallenge.Api.Application.Commands.Product.Update;
+namespace EvoltisChallenge.Api.Application.Commands.Product.Create;
 
-public record UpdateProductCommand(
-    Guid Id,
+public record CreateProductCommand(
     string Name,
     string Description,
     double Price,
-    Guid ProductCategoryId) : IRequest, ITransaction, IValidate;
+    Guid ProductCategoryId) : IRequest<Guid>, ITransaction, IValidate;
 
-public class UpdateProductCommandHandler(
+public class CreateProductCommandHandler(
     IUnitOfWork unitOfWork,
     IMapper autoMapper)
-    : IRequestHandler<UpdateProductCommand>
+    : IRequestHandler<CreateProductCommand, Guid>
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
     private readonly IMapper _autoMapper = autoMapper;
 
-    public async Task Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
-        var product = await _unitOfWork.Products.GetByIdAsync(request.Id, cancellationToken);
-
-        if (product is null)
-        {
-            throw new EntityNotFoundException(nameof(Domain.Product), request.Id);
-        }
-
         var pCategory = await _unitOfWork.ProductCategories.GetByIdAsync(request.ProductCategoryId, cancellationToken);
 
         if (pCategory is null)
@@ -44,12 +37,17 @@ public class UpdateProductCommandHandler(
                 request.ProductCategoryId);
         }
 
-        var pToUpdate = _autoMapper.Map<Domain.Product>(request);
+        var product = _autoMapper.Map<Domain.Product>(request);
 
-        pToUpdate.ModifiedAt = DateTime.UtcNow;
+        product.CreatedAt = DateTime.UtcNow;
+        product.ModifiedAt = DateTime.UtcNow;
 
-        _unitOfWork.Products.Update(pToUpdate);
+        var getId = await _unitOfWork.Products.AddAsync(product, cancellationToken);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        var id = getId();
+
+        return id;
     }
 }

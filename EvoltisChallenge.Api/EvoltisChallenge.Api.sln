@@ -5,6 +5,26 @@ VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvoltisChallenge.Api", "src\EvoltisChallenge.Api\EvoltisChallenge.Api.csproj", "{A8160A17-57E2-416E-ACD0-F389BBB08AF8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{AE50F790-DFA4-4077-97BA-650EABCEC9DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{D7E649C2-5302-44E3-9E04-974BB1C199B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestructure", "Infraestructure", "{06B44096-7D9D-4B91-AEE9-CF545403CA88}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{B17D3EE1-DC7C-4651-B67B-B800F2816068}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{57EA0049-A4DA-4ADC-9BD6-8E7602265EB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvoltisChallenge.Api.Application", "src\EvoltisChallenge.Api.Application\EvoltisChallenge.Api.Application.csproj", "{FAF0FBCA-C7A3-49B0-A143-4EE8E4AEF1EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvoltisChallenge.Api.Application.Interfaces", "src\EvoltisChallenge.Api.Application.Interfaces\EvoltisChallenge.Api.Application.Interfaces.csproj", "{03BCCC66-673E-4ACD-B870-4AA07E869CFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvoltisChallenge.Api.Domain", "src\EvoltisChallenge.Api.Domain\EvoltisChallenge.Api.Domain.csproj", "{CBA29D34-6818-4322-A1A2-92D811CE6106}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvoltisChallenge.Api.Infraestructure", "src\EvoltisChallenge.Api.Infraestructure\EvoltisChallenge.Api.Infraestructure.csproj", "{8A5111F4-7FC7-4FCB-8500-2F7334D8585B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvoltisChallenge.Api.Infraestructure.Repositories.Ef", "src\EvoltisChallenge.Api.Infraestructure.Repositories.MySql\EvoltisChallenge.Api.Infraestructure.Repositories.Ef.csproj", "{0139347C-51E7-4559-B1D0-C70E635CC633}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +35,36 @@ Global
 		{A8160A17-57E2-416E-ACD0-F389BBB08AF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8160A17-57E2-416E-ACD0-F389BBB08AF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8160A17-57E2-416E-ACD0-F389BBB08AF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAF0FBCA-C7A3-49B0-A143-4EE8E4AEF1EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAF0FBCA-C7A3-49B0-A143-4EE8E4AEF1EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAF0FBCA-C7A3-49B0-A143-4EE8E4AEF1EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAF0FBCA-C7A3-49B0-A143-4EE8E4AEF1EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03BCCC66-673E-4ACD-B870-4AA07E869CFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03BCCC66-673E-4ACD-B870-4AA07E869CFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03BCCC66-673E-4ACD-B870-4AA07E869CFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03BCCC66-673E-4ACD-B870-4AA07E869CFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBA29D34-6818-4322-A1A2-92D811CE6106}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBA29D34-6818-4322-A1A2-92D811CE6106}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBA29D34-6818-4322-A1A2-92D811CE6106}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBA29D34-6818-4322-A1A2-92D811CE6106}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A5111F4-7FC7-4FCB-8500-2F7334D8585B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A5111F4-7FC7-4FCB-8500-2F7334D8585B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A5111F4-7FC7-4FCB-8500-2F7334D8585B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A5111F4-7FC7-4FCB-8500-2F7334D8585B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0139347C-51E7-4559-B1D0-C70E635CC633}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0139347C-51E7-4559-B1D0-C70E635CC633}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0139347C-51E7-4559-B1D0-C70E635CC633}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0139347C-51E7-4559-B1D0-C70E635CC633}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A8160A17-57E2-416E-ACD0-F389BBB08AF8} = {AE50F790-DFA4-4077-97BA-650EABCEC9DD}
+		{FAF0FBCA-C7A3-49B0-A143-4EE8E4AEF1EB} = {B17D3EE1-DC7C-4651-B67B-B800F2816068}
+		{03BCCC66-673E-4ACD-B870-4AA07E869CFA} = {B17D3EE1-DC7C-4651-B67B-B800F2816068}
+		{CBA29D34-6818-4322-A1A2-92D811CE6106} = {D7E649C2-5302-44E3-9E04-974BB1C199B8}
+		{8A5111F4-7FC7-4FCB-8500-2F7334D8585B} = {06B44096-7D9D-4B91-AEE9-CF545403CA88}
+		{0139347C-51E7-4559-B1D0-C70E635CC633} = {06B44096-7D9D-4B91-AEE9-CF545403CA88}
 	EndGlobalSection
 EndGlobal

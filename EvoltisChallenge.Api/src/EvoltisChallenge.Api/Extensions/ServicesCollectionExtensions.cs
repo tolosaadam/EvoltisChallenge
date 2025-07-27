@@ -1,6 +1,8 @@
 ﻿using EvoltisChallenge.Api.Application;
 using EvoltisChallenge.Api.AutoMapperProfiles;
+using EvoltisChallenge.Api.Infraestructure.Repositories.Ef;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace EvoltisChallenge.Api.Extensions;
@@ -12,6 +14,16 @@ public static class ServicesCollectionExtensions
         services.AddMediatR(cfg =>
         {
             cfg.RegisterServicesFromAssembly(typeof(ApplicationAssemblyReference).Assembly);
+        });
+
+        return services;
+    }
+
+    public static IServiceCollection AddInfraestructureSettings(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddDbContext<AppDbContext>(options =>
+        {
+            options.UseMySql(configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 33)));
         });
 
         return services;

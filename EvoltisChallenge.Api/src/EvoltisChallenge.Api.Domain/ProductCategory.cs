@@ -7,5 +7,7 @@ using System.Threading.Tasks;
 namespace EvoltisChallenge.Api.Domain;
 
 public class ProductCategory : DomainEntity<Guid>
-{  
+{
+    public string? Name { get; set; }
+    public string? Description { get; set; }
 }

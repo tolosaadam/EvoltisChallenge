@@ -15,6 +15,7 @@ builder.Services
     .AddValidatorSettings()
     .AddInfraestructureSettings(builder.Configuration)
     .AddSwaggerSettings()
+    .AddBehaviorSettings()
     .AddCorsSettings();
 
 var app = builder.Build();

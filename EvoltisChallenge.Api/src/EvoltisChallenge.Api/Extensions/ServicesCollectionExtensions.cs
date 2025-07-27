@@ -1,7 +1,9 @@
 ﻿using EvoltisChallenge.Api.Application;
+using EvoltisChallenge.Api.Application.Behaviors;
 using EvoltisChallenge.Api.AutoMapperProfiles;
 using EvoltisChallenge.Api.Infraestructure.Repositories.Ef;
 using FluentValidation;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -50,6 +52,14 @@ public static class ServicesCollectionExtensions
     public static IServiceCollection AddSwaggerSettings(this IServiceCollection services)
     {
         services.AddSwaggerGen();
+
+        return services;
+    }
+
+    public static IServiceCollection AddBehaviorSettings(this IServiceCollection services)
+    {
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>));
 
         return services;
     }

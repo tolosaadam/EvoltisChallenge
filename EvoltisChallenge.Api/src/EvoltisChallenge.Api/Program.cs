@@ -1,6 +1,7 @@
 using EvoltisChallenge.Api.Extensions;
 using EvoltisChallenge.Api.Infraestructure.Repositories.Ef;
 using EvoltisChallenge.Api.Middlewares;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

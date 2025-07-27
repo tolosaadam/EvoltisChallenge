@@ -17,7 +17,7 @@ public class EfProductRepository(
 {
     protected override DbSet<ProductDb> DbSet => context.Set<ProductDb>();
 
-    public async Task<IEnumerable<Domain.Product>> GetAllAsync(bool includeCategory, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<Domain.Product>> GetAllIncludeAsync(CancellationToken cancellationToken)
     {
         return MapToDomainModel(
             await DbSet

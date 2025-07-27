@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace EvoltisChallenge.Api.Application.Interfaces.Persistence;
 
-public interface IEfRepository<TDomainModel, TDomainId> : IReadRepository<TDomainModel, TDomainId>, IWriteRepository<TDomainModel, TDomainId>
+public interface IEfRepository<TDomainModel, TDomainId>
+    : IReadRepository<TDomainModel, TDomainId>, IWriteRepository<TDomainModel, TDomainId>
 {
 }

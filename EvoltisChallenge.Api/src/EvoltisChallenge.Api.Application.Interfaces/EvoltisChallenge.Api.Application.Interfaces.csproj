@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EvoltisChallenge.Api.Domain\EvoltisChallenge.Api.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

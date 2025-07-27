@@ -1,0 +1,100 @@
+﻿using EvoltisChallenge.Api.Application.Interfaces.Persistence;
+using EvoltisChallenge.Api.Domain;
+using Microsoft.EntityFrameworkCore.Storage;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EvoltisChallenge.Api.Infraestructure.Repositories.Ef;
+
+public class UnitOfWork(
+    AppDbContext context,
+    IEfRepositoryFactory efRepositoryFactory
+    ) : IUnitOfWork
+{
+    private readonly AppDbContext _context = context;
+    private readonly IEfRepositoryFactory _efRepositoryFactory = efRepositoryFactory;
+    private IDbContextTransaction? _transaction;
+    private bool _disposed;
+
+    #region Repositories
+    // Campos privados para cachear los repos
+    private IEfProductRepository? _products;
+    private IEfProductCategoryRepository? _productCategories;
+
+    public IEfProductRepository Products =>
+        _products ??= _efRepositoryFactory.CreateProductRepository();
+
+    public IEfProductCategoryRepository ProductCategories =>
+        _productCategories ??= _efRepositoryFactory.CreateProductCategoryRepository();
+    #endregion
+
+    public bool HasActiveTransaction => _transaction is not null;
+
+    public int SaveChanges() =>
+        _context.SaveChanges();
+
+    public async Task SaveChangesAsync(CancellationToken cancellationToken = default) =>
+        await _context.SaveChangesAsync(cancellationToken);
+
+    public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
+    {
+        if (_transaction is not null)
+            return;
+
+        _transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+    }
+
+    public async Task CommitTransactionAsync(CancellationToken cancellationToken = default)
+    {
+        if (_transaction is null)
+            throw new InvalidOperationException("No active transaction.");
+
+        await _transaction.CommitAsync(cancellationToken);
+        await _transaction.DisposeAsync();
+        _transaction = null;
+    }
+
+    public async Task RollbackTransactionAsync(CancellationToken cancellationToken = default)
+    {
+        if (_transaction is not null)
+        {
+            await _transaction.RollbackAsync(cancellationToken);
+            await _transaction.DisposeAsync();
+            _transaction = null;
+        }
+    }
+
+    public void Dispose()
+    {
+        Dispose(disposing: true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!_disposed)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+            _disposed = true;
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (!_disposed)
+        {
+            if (_context is not null)
+            {
+                await _context.DisposeAsync();
+            }
+            _disposed = true;
+            GC.SuppressFinalize(this);
+        }
+    }
+}

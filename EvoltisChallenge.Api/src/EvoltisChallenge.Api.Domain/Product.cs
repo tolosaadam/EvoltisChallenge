@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EvoltisChallenge.Api.Domain;
 
-public class Product : DomainEntity<Guid>
+public class Product : AuditedDomainEntity<Guid>
 {
     public string? Name { get; set; }
     public string? Description { get; set; }

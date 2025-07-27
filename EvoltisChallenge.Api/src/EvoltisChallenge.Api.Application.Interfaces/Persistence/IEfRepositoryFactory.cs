@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace EvoltisChallenge.Api.Application.Interfaces.Persistence;
 
-public interface IEfProductRepository : IEfRepository<Domain.Product, Guid>
+public interface IEfRepositoryFactory
 {
-    Task<IEnumerable<Domain.Product>> GetAllIncludeAsync(CancellationToken cancellationToken = default);
+    IEfProductRepository CreateProductRepository();
+    IEfProductCategoryRepository CreateProductCategoryRepository();
 }

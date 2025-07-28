@@ -3,7 +3,6 @@ using EvoltisChallenge.Api.Application.Interfaces.Persistence;
 using EvoltisChallenge.Api.Domain.Interfaces;
 using EvoltisChallenge.Api.Infraestructure.dbEntities.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace EvoltisChallenge.Api.Infraestructure.Repositories.Ef;
 

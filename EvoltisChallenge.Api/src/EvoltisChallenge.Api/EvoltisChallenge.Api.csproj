@@ -24,10 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Requests\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\EvoltisChallenge.Api.Application.Interfaces\EvoltisChallenge.Api.Application.Interfaces.csproj" />
     <ProjectReference Include="..\EvoltisChallenge.Api.Application\EvoltisChallenge.Api.Application.csproj" />
     <ProjectReference Include="..\EvoltisChallenge.Api.Domain\EvoltisChallenge.Api.Domain.csproj" />

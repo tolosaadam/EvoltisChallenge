@@ -31,7 +31,7 @@ public class Endpoints
         var query = new GetByIdProductQuery(id);
         var result = await mediator.Send(query, cancellationToken);
         var mappedResult = autoMapper.Map<Responses.Product.ProductResponse>(result);
-        return Results.Ok(mappedResult);
+        return result is not null ? Results.Ok(mappedResult) : Results.NotFound();
     }
 
     internal static async Task<IResult> Create(

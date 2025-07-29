@@ -1,5 +1,6 @@
 ﻿using EvoltisChallenge.Api.Application;
 using EvoltisChallenge.Api.Application.Behaviors;
+using EvoltisChallenge.Api.Application.Interfaces.Persistence;
 using EvoltisChallenge.Api.AutoMapperProfiles;
 using EvoltisChallenge.Api.Infraestructure.Repositories.Ef;
 using FluentValidation;
@@ -25,8 +26,13 @@ public static class ServicesCollectionExtensions
     {
         services.AddDbContext<AppDbContext>(options =>
         {
-            options.UseMySql(configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 33)));
+            options.UseMySql(configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 4, 6)));
         });
+
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IEfRepositoryFactory, EfRepositoryFactory>();
+        services.AddScoped<IEfProductRepository, EfProductRepository>();
+        services.AddScoped<IEfProductCategoryRepository, EfProductCategoryRepository>();
 
         return services;
     }

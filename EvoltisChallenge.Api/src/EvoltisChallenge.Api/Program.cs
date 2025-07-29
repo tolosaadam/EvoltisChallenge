@@ -1,3 +1,5 @@
+using EvoltisChallenge.Api.EndpointsDefinitions.Product;
+using EvoltisChallenge.Api.EndpointsDefinitions.ProductType;
 using EvoltisChallenge.Api.Extensions;
 using EvoltisChallenge.Api.Infraestructure.Repositories.Ef;
 using EvoltisChallenge.Api.Middlewares;
@@ -35,5 +37,7 @@ app.UseCors("AllowAllOrigins")
     .UseHttpsRedirection()
     .UseMiddleware<HandlingExceptionMiddleware>();
 
-app.Run();
+app.MapProductEndpoints()
+    .MapProductCategoryEndpoints()
+    .Run();
 

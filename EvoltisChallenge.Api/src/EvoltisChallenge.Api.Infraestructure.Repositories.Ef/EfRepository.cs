@@ -1,0 +1,75 @@
+﻿using AutoMapper;
+using EvoltisChallenge.Api.Application.Interfaces.Persistence;
+using EvoltisChallenge.Api.Domain.Interfaces;
+using EvoltisChallenge.Api.Infraestructure.dbEntities.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
+namespace EvoltisChallenge.Api.Infraestructure.Repositories.Ef;
+
+public abstract class EfRepository<TDomainModel, TEntityModel, TId>(
+    IMapper autoMapper) : Repository<TDomainModel, TEntityModel, TId>(autoMapper),
+    IEfRepository<TDomainModel, TId>
+    where TEntityModel : class, IEntity<TId>
+    where TDomainModel : class, IDomainEntity<TId>
+{
+    protected abstract DbSet<TEntityModel> DbSet { get; }
+
+    public virtual Func<TId> Add(TDomainModel domainModel)
+    {
+        var entityModel = MapToEntityModel(domainModel);
+
+        DbSet.Add(entityModel);
+
+        return () => entityModel.Id;
+    }
+
+    public virtual async Task<Func<TId>> AddAsync(TDomainModel domainModel, CancellationToken cancellationToken = default)
+    {
+        var entityModel = MapToEntityModel(domainModel);
+
+        await DbSet.AddAsync(entityModel, cancellationToken);
+
+        return () => entityModel.Id;
+    }
+
+    public virtual IEnumerable<TDomainModel> GetAll() =>
+        MapToDomainModel(
+            DbSet
+            .ToList()
+        );
+
+    public virtual async Task<IEnumerable<TDomainModel>> GetAllAsync(CancellationToken cancellationToken = default) =>
+        MapToDomainModel(
+            await DbSet
+            .AsNoTracking()
+            .ToListAsync(cancellationToken)
+        );
+
+    public virtual TDomainModel? GetById(TId id) =>
+        MapToDomainModel(
+            DbSet
+            .AsNoTracking()
+            .FirstOrDefault(x => x.Id!.Equals(id))
+        );
+
+    public virtual async Task<TDomainModel?> GetByIdAsync(TId id, CancellationToken cancellationToken = default) =>
+        MapToDomainModel(
+            await DbSet
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id!.Equals(id), cancellationToken: cancellationToken)
+        );
+
+    public virtual void Delete(TDomainModel domainModel) =>
+        DbSet
+        .Remove(MapToEntityModel(domainModel));
+
+
+    public virtual TDomainModel? Update(TDomainModel domainModel)
+    {
+        var entityModel = MapToEntityModel(domainModel);
+
+        var result = DbSet.Update(entityModel);
+
+        return MapToDomainModel(result.Entity);
+    }
+}

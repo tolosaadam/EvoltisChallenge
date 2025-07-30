@@ -1,0 +1,57 @@
+services:
+  mysql:
+    image: mysql:8.4.6
+    container_name: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456aA_!
+      MYSQL_DATABASE: EvoltisChallengeDb
+      MYSQL_USER: evoltis
+      MYSQL_PASSWORD: evoltis123
+    volumes:
+      - mysqldata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend
+
+  api:
+    build:
+      context: ./EvoltisChallenge.Api
+      dockerfile: Dockerfile
+    container_name: EvoltisChallenge-api
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ConnectionStrings__DefaultConnection=Server=mysql;Database=EvoltisChallengeDb;User=evoltis;Password=evoltis123;TreatTinyAsBoolean=true
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - backend
+
+  # app:
+  #   build:
+  #     context: ./EvoltisChallenge.App
+  #     dockerfile: Dockerfile
+  #     args:
+  #       REACT_APP_API_URL: http://localhost:8080/
+  #   container_name: EvoltisChallenge-app
+  #   ports:
+  #     - "3000:80"
+  #   depends_on:
+  #     - api
+  #   networks:
+  #     - backend
+
+volumes:
+  mysqldata:
+
+networks:
+  backend:

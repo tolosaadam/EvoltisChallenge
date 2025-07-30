@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include=".EndpointsDefinitions\ProductCategory\Endpoints.cs" />
+    <Compile Include=".EndpointsDefinitions\ProductCategory\ProductCategoryAppExtensions.cs" />
+    <Compile Include=".EndpointsDefinitions\Product\Endpoints.cs" />
+    <Compile Include=".EndpointsDefinitions\Product\ProductAppExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="15.0.1" />
+    <PackageReference Include="FluentValidation" Version="12.0.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
+    <PackageReference Include="MediatR" Version="13.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EvoltisChallenge.Api.Application.Interfaces\EvoltisChallenge.Api.Application.Interfaces.csproj" />
+    <ProjectReference Include="..\EvoltisChallenge.Api.Application\EvoltisChallenge.Api.Application.csproj" />
+    <ProjectReference Include="..\EvoltisChallenge.Api.Domain\EvoltisChallenge.Api.Domain.csproj" />
+    <ProjectReference Include="..\EvoltisChallenge.Api.Infraestructure.Repositories.Ef\EvoltisChallenge.Api.Infraestructure.Repositories.Ef.csproj" />
+  </ItemGroup>
+
+</Project>

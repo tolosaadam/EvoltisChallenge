@@ -17,50 +17,50 @@ namespace EvoltisChallenge.Api.Infraestructure.Repositories.Ef.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "ProductCategories",
+                name: "product_categories",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    Name = table.Column<string>(type: "longtext", nullable: true)
+                    id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Description = table.Column<string>(type: "longtext", nullable: true)
+                    description = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductCategories", x => x.Id);
+                    table.PrimaryKey("PK_product_categories", x => x.id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "products",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    Name = table.Column<string>(type: "longtext", nullable: true)
+                    id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Description = table.Column<string>(type: "longtext", nullable: true)
+                    description = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Price = table.Column<double>(type: "double", nullable: false),
-                    ProductCategoryId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ModifiedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    price = table.Column<double>(type: "double", nullable: false),
+                    product_category_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    created_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    modified_at = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_products", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Products_ProductCategories_ProductCategoryId",
-                        column: x => x.ProductCategoryId,
-                        principalTable: "ProductCategories",
-                        principalColumn: "Id",
+                        name: "FK_products_product_categories_product_category_id",
+                        column: x => x.product_category_id,
+                        principalTable: "product_categories",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.InsertData(
-                table: "ProductCategories",
-                columns: new[] { "Id", "Description", "Name" },
+                table: "product_categories",
+                columns: new[] { "id", "description", "name" },
                 values: new object[,]
                 {
                     { new Guid("12345678-1234-1234-1234-1234567890ab"), "PC peripherals", "Peripherals" },
@@ -69,8 +69,8 @@ namespace EvoltisChallenge.Api.Infraestructure.Repositories.Ef.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "Id", "CreatedAt", "Description", "ModifiedAt", "Name", "Price", "ProductCategoryId" },
+                table: "products",
+                columns: new[] { "id", "created_at", "description", "modified_at", "name", "price", "product_category_id" },
                 values: new object[,]
                 {
                     { new Guid("42345678-1234-1234-1234-1234567890ab"), new DateTime(2025, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Logitech white", new DateTime(2025, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Keyboard", 33.5, new Guid("12345678-1234-1234-1234-1234567890ab") },
@@ -80,19 +80,19 @@ namespace EvoltisChallenge.Api.Infraestructure.Repositories.Ef.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_ProductCategoryId",
-                table: "Products",
-                column: "ProductCategoryId");
+                name: "IX_products_product_category_id",
+                table: "products",
+                column: "product_category_id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "products");
 
             migrationBuilder.DropTable(
-                name: "ProductCategories");
+                name: "product_categories");
         }
     }
 }

@@ -24,7 +24,7 @@ services:
     build:
       context: ./EvoltisChallenge.Api
       dockerfile: Dockerfile
-    container_name: EvoltisChallenge-api
+    container_name: api
     ports:
       - "8080:8080"
     environment:
@@ -42,7 +42,7 @@ services:
   #     dockerfile: Dockerfile
   #     args:
   #       REACT_APP_API_URL: http://localhost:8080/
-  #   container_name: EvoltisChallenge-app
+  #   container_name: app
   #   ports:
   #     - "3000:80"
   #   depends_on:

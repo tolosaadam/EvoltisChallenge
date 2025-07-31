@@ -18,7 +18,7 @@ public class GetAllProductQueryHandler(
 
     public async Task<IEnumerable<Domain.Product>> Handle(GetAllProductQuery request, CancellationToken cancellationToken)
     {
-        var result = await _efProductRepository.GetAllIncludeAsync(cancellationToken);
+        var result = await _efProductRepository.GetAllAsync(cancellationToken);
 
         return result;
     }

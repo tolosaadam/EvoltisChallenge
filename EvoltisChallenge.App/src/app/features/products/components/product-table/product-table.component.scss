@@ -1,0 +1,41 @@
+.card {
+  padding: 2rem;
+  margin: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.p-toolbar {
+  border: none;
+  background: transparent;
+  padding: 0 0 1rem 0;
+}
+
+.p-button {
+  margin-right: 0.5rem;
+}
+
+.p-table .p-datatable-thead > tr > th {
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+  font-weight: 600;
+}
+
+.p-table .p-datatable-tbody > tr > td {
+  border-color: #dee2e6;
+}
+
+.p-table .p-datatable-tbody > tr:hover {
+  background-color: #f8f9fa;
+}
+
+:host ::ng-deep .p-paginator {
+  border: none;
+  background: transparent;
+}
+
+:host ::ng-deep .p-datatable-caption {
+  background: transparent;
+  border: none;
+  padding: 1rem 0;
+}

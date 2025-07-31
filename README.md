@@ -60,7 +60,7 @@ The project includes a `docker-compose.yml` file that brings up the following se
 | Service           | External Port | Internal Port | Description                    |
 |-------------------|---------------|---------------|--------------------------------|
 | Angular App       | 4200          | 80            | Frontend application           |
-| .NET API          | 5000          | 80            | Web API for product management |
+| .NET API          | 8080          | 80            | Web API for product management |
 
 ---
 
@@ -84,12 +84,6 @@ The project includes a `docker-compose.yml` file that brings up the following se
 ## 🎯 NgRx Implementation Details
 
 ### Simplified Form Actions
-```typescript
-- openCreateProductForm()
-- openEditProductForm({ product })
-- closeProductForm()
-- resetProductForm()
-```
 
 ### Effect-based Side Effects
 - **CRUD Operations**: Centralized API calls with error handling
@@ -132,20 +126,6 @@ The project includes a `docker-compose.yml` file that brings up the following se
 From the root of the project, run:
 ```bash
 docker-compose up
-```
-
-### Development Mode
-**Backend:**
-```bash
-cd EvoltisChallenge.Api
-dotnet run
-```
-
-**Frontend:**
-```bash
-cd EvoltisChallenge.App
-npm install
-npm start
 ```
 
 ---

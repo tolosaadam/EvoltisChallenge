@@ -1,17 +1,17 @@
-<div class="product-details-container">
-  <div class="page-header">
-    <div class="breadcrumb">
-      <p-button 
-        icon="pi pi-arrow-left" 
-        class="p-button-text p-button-plain" 
-        label="Volver a Productos"
-        routerLink="/products">
-      </p-button>
+<!-- Loading skeleton -->
+<ng-container *ngIf="loading$ | async; else showContent">
+  <div class="product-details-container">
+    <div class="page-header">
+      <div class="breadcrumb">
+        <p-button 
+          icon="pi pi-arrow-left" 
+          class="p-button-text p-button-plain" 
+          label="Volver a Productos"
+          routerLink="/products">
+        </p-button>
+      </div>
     </div>
-  </div>
-
-  <!-- Loading skeleton -->
-  <ng-container *ngIf="loading$ | async; else showContent">
+    
     <p-card>
       <div class="skeleton-container">
         <p-skeleton height="2rem" class="mb-3"></p-skeleton>  <!-- Título -->
@@ -23,11 +23,23 @@
         <p-skeleton height="3rem" class="mb-3"></p-skeleton>  <!-- Descripción Producto -->
       </div>
     </p-card>
-  </ng-container>
+  </div>
+</ng-container>
 
-  <!-- Contenido del producto -->
-  <ng-template #showContent>
-    <div *ngIf="productWithCategory$ | async as product; else notFound">
+<!-- Contenido principal -->
+<ng-template #showContent>
+  <div *ngIf="productWithCategory$ | async as product; else notFound">
+    <div class="product-details-container">
+      <div class="page-header">
+        <div class="breadcrumb">
+          <p-button 
+            icon="pi pi-arrow-left" 
+            class="p-button-text p-button-plain" 
+            label="Volver a Productos"
+            routerLink="/products">
+          </p-button>
+        </div>
+      </div>
       <p-card>
         <ng-template pTemplate="header">
           <div class="card-header">
@@ -128,15 +140,16 @@
         </ng-template>
       </p-card>
     </div>
+  </div>
 
-    <!-- Redirige a 404 si no encuentra el producto -->
-    <ng-template #notFound>
-      <app-not-found></app-not-found>
-    </ng-template>
+  <!-- Producto no encontrado -->
+  <ng-template #notFound>
+    <app-not-found></app-not-found>
   </ng-template>
-</div>
+</ng-template>
 
 <app-product-form></app-product-form>
+
 
 <p-confirmDialog></p-confirmDialog>
 <p-toast></p-toast>

@@ -1,2 +1,102 @@
-<p>product-table works!</p>
-<button [routerLink]="['42345678-1234-1234-1234-1234567890ab']">Detalles</button>
+<div class="card">
+  <p-toolbar styleClass="mb-4">
+    <ng-template pTemplate="left">
+      <h2>Productos</h2>
+    </ng-template>
+    <ng-template pTemplate="right">
+      <p-button 
+        icon="pi pi-plus" 
+        label="Agregar Producto" 
+        class="p-button-success mr-2"
+        (click)="onAdd()">
+      </p-button>
+    </ng-template>
+  </p-toolbar>
+
+  <p-table 
+    #dt
+    [value]="(productsWithCategory$ | async) || []" 
+    [loading]="(loading$ | async) || false"
+    dataKey="id"
+    [rows]="10"
+    [paginator]="true"
+    [globalFilterFields]="['name','category.name','price']"
+    [tableStyle]="{'min-width': '75rem'}"
+    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} productos"
+    [showCurrentPageReport]="true">
+    
+    <ng-template pTemplate="caption">
+      <div class="flex">
+        <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <input 
+            pInputText 
+            type="text" 
+            #filter
+            (input)="dt.filterGlobal($any($event.target).value, 'contains')" 
+            placeholder="Buscar productos..." />
+        </span>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="name">
+          Nombre 
+          <p-sortIcon field="name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="price">
+          Precio 
+          <p-sortIcon field="price"></p-sortIcon>
+        </th>
+        <th pSortableColumn="category.name">
+          Categoría 
+          <p-sortIcon field="category.name"></p-sortIcon>
+        </th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price | currency:'USD':'symbol':'1.2-2' }}</td>
+        <td>{{ product.category?.name || 'Sin categoría' }}</td>
+        <td>
+          <p-button 
+            icon="pi pi-eye" 
+            class="p-button-rounded p-button-info mr-2" 
+            (click)="onView(product.id)"
+            pTooltip="Ver detalles">
+          </p-button>
+          <p-button 
+            icon="pi pi-pencil" 
+            class="p-button-rounded p-button-success mr-2" 
+            (click)="onEdit(product)"
+            pTooltip="Editar">
+          </p-button>
+          <p-button 
+            icon="pi pi-trash" 
+            class="p-button-rounded p-button-warning" 
+            (click)="onDelete(product)"
+            pTooltip="Eliminar">
+          </p-button>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4">No se encontraron productos.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<app-product-form
+  [(visible)]="showFormDialog"
+  [product]="selectedProduct">
+</app-product-form>
+
+<p-confirmDialog></p-confirmDialog>
+<p-toast></p-toast>

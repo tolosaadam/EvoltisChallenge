@@ -129,15 +129,9 @@
       </p-card>
     </div>
 
-    <!-- Producto no encontrado -->
+    <!-- Redirige a 404 si no encuentra el producto -->
     <ng-template #notFound>
-      <p-card>
-        <div class="not-found">
-          <i class="pi pi-exclamation-triangle not-found-icon"></i>
-          <h3>Producto no encontrado</h3>
-          <p>El producto que buscas no existe o ha sido eliminado.</p>
-        </div>
-      </p-card>
+      <app-not-found></app-not-found>
     </ng-template>
   </ng-template>
 </div>

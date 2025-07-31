@@ -184,6 +184,12 @@ EvoltisChallenge/
 
 ---
 
+## 📁 Database Diagram
+
+<img width="692" height="400" alt="image" src="https://github.com/user-attachments/assets/c52279bf-89f4-4334-b853-6ee616477ef3" />
+
+---
+
 ## 👤 Author
 
 **Adam Ezequiel Tolosa**  

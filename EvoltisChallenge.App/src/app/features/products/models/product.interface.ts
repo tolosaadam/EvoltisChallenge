@@ -6,7 +6,6 @@ export interface Product {
     description: string;
     price: number;
     productCategoryId: string;
-    category?: ProductCategory;
 }
 
 // Interfaz para la creación de un producto.
@@ -30,4 +29,9 @@ export interface ProductState {
     products: Product[];
     loading: boolean;
     error?: any;
+}
+
+// Interfaz para un producto con su categoría asociada.
+export interface ProductWithCategory extends Omit<Product, 'productCategoryId'> {
+    category: ProductCategory | undefined;
 }

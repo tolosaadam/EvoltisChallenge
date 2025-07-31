@@ -6,5 +6,28 @@ export interface Product {
     description: string;
     price: number;
     productCategoryId: string;
-    category: ProductCategory;
+    category?: ProductCategory;
+}
+
+// Interfaz para la creación de un producto.
+export interface CreateProduct {
+    name: string;
+    description: string;
+    price: number;
+    productCategoryId: string;
+}
+
+// Interfaz para la actualización de un producto.
+export interface UpdateProduct {
+    name: string;
+    description: string;
+    price: number;
+    productCategoryId: string;
+}
+
+// Interfaz para el estado de los productos dentro del reducer.
+export interface ProductState {
+    products: Product[];
+    loading: boolean;
+    error?: any;
 }

@@ -1,11 +1,148 @@
-<h2>Detalles del producto</h2>
-<div *ngIf="productWithCategory$ | async as product; else notFound">
-  <p><strong>ID:</strong> {{ product.id }}</p>
-  <p><strong>Nombre:</strong> {{ product.name }}</p>
-  <p><strong>Descripción:</strong> {{ product.description }}</p>
-  <p><strong>Precio:</strong> ${{ product.price }}</p>
-  <p><strong>Categoría:</strong> {{ product.category?.name }}</p>
+<div class="product-details-container">
+  <div class="page-header">
+    <div class="breadcrumb">
+      <p-button 
+        icon="pi pi-arrow-left" 
+        class="p-button-text p-button-plain" 
+        label="Volver a Productos"
+        routerLink="/products">
+      </p-button>
+    </div>
+  </div>
+
+  <!-- Loading skeleton -->
+  <ng-container *ngIf="loading$ | async; else showContent">
+    <p-card>
+      <div class="skeleton-container">
+        <p-skeleton height="2rem" class="mb-3"></p-skeleton>  <!-- Título -->
+        <p-skeleton height="1rem" class="mb-2"></p-skeleton>  <!-- ID -->
+        <p-skeleton height="1rem" class="mb-2"></p-skeleton>  <!-- Precio -->
+        <p-skeleton height="1rem" class="mb-2"></p-skeleton>  <!-- Categoría -->
+        <p-skeleton height="1rem" class="mb-2"></p-skeleton>  <!-- ID Categoría -->
+        <p-skeleton height="3rem" class="mb-3"></p-skeleton>  <!-- Descripción Categoría -->  
+        <p-skeleton height="3rem" class="mb-3"></p-skeleton>  <!-- Descripción Producto -->
+      </div>
+    </p-card>
+  </ng-container>
+
+  <!-- Contenido del producto -->
+  <ng-template #showContent>
+    <div *ngIf="productWithCategory$ | async as product; else notFound">
+      <p-card>
+        <ng-template pTemplate="header">
+          <div class="card-header">
+            <div class="product-title">
+              <h2>{{ product.name }}</h2>
+              <p-tag 
+                [value]="product.category?.name || 'Sin categoría'"
+                [severity]="product.category ? 'success' : 'warning'"
+                icon="pi pi-tag">
+              </p-tag>
+            </div>
+          </div>
+        </ng-template>
+
+        <div class="product-content">
+          <div class="detail-grid">
+            <!-- ID del producto -->
+            <div class="detail-item">
+              <label class="detail-label">
+                <i class="pi pi-id-card"></i>
+                ID del Producto
+              </label>
+              <span class="detail-value">{{ product.id }}</span>
+            </div>
+
+            <!-- Precio -->
+            <div class="detail-item">
+              <label class="detail-label">
+                <i class="pi pi-dollar"></i>
+                Precio
+              </label>
+              <span class="detail-value price">
+                {{ product.price | currency:'USD':'symbol':'1.2-2' }}
+              </span>
+            </div>
+
+            <!-- Categoría -->
+            <div class="detail-item">
+              <label class="detail-label">
+                <i class="pi pi-sitemap"></i>
+                Categoría
+              </label>
+              <span class="detail-value">
+                {{ product.category?.name || 'Sin categoría asignada' }}
+              </span>
+            </div>
+
+            <!-- ID de Categoría -->
+            <div class="detail-item">
+              <label class="detail-label">
+                <i class="pi pi-hashtag"></i>
+                ID de Categoría
+              </label>
+              <span class="detail-value">
+                {{ product.category?.id || 'N/A' }}
+              </span>
+            </div>
+
+            <!-- Descripción de la Categoría -->
+            <div class="detail-item description">
+              <label class="detail-label">
+                <i class="pi pi-info-circle"></i>
+                Descripción de la Categoría
+              </label>
+              <p class="detail-value">
+                {{ product.category?.description || 'Sin descripción de categoría disponible' }}
+              </p>
+            </div>
+
+            <!-- Descripción del Producto -->
+            <div class="detail-item description">
+              <label class="detail-label">
+                <i class="pi pi-align-left"></i>
+                Descripción del Producto
+              </label>
+              <p class="detail-value">
+                {{ product.description || 'Sin descripción disponible' }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <ng-template pTemplate="footer">
+          <div class="card-actions">
+            <p-button 
+              label="Editar Producto" 
+              icon="pi pi-pencil" 
+              class="p-button-primary mr-2"
+              (click)="onEdit(product)">
+            </p-button>
+            <p-button 
+              label="Eliminar" 
+              icon="pi pi-trash" 
+              class="p-button-danger"
+              (click)="onDelete(product)">
+            </p-button>
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+
+    <!-- Producto no encontrado -->
+    <ng-template #notFound>
+      <p-card>
+        <div class="not-found">
+          <i class="pi pi-exclamation-triangle not-found-icon"></i>
+          <h3>Producto no encontrado</h3>
+          <p>El producto que buscas no existe o ha sido eliminado.</p>
+        </div>
+      </p-card>
+    </ng-template>
+  </ng-template>
 </div>
-<ng-template #notFound>
-  <p>Producto no encontrado</p>
-</ng-template>
+
+<app-product-form></app-product-form>
+
+<p-confirmDialog></p-confirmDialog>
+<p-toast></p-toast>

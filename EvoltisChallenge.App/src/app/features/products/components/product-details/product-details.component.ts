@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/product.interface';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-product-details',
@@ -18,10 +19,12 @@ export class ProductDetailsComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
 
     if (id) {
-      this.productService.getById(id).subscribe({
-        next: (prod) => (this.product = prod),
-        error: (err) => console.error('Error loading product:', err),
-      });
+      this.productService.getById(id)
+        .pipe(take(1))
+        .subscribe({
+          next: (prod) => (this.product = prod),
+          error: (err) => console.error('Error loading product:', err),
+        });
     }
   }
 

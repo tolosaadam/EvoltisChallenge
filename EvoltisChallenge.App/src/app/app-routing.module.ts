@@ -4,7 +4,7 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
 
 const routes: Routes = [
   { path: '', redirectTo: '/products', pathMatch: 'full' },
-  { path: 'products', loadChildren: () => import('./features/products/product.module').then(m => m.ProductModule) },
+  { path: 'products', loadChildren: () => import('./features/feature.module').then(m => m.FeatureModule) },
   { path: '**', component: NotFoundComponent }
 ];
 

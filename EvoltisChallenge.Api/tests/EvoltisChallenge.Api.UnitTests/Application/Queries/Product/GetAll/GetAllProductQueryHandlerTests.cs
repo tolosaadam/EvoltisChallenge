@@ -65,7 +65,7 @@ public class GetAllProductQueryHandlerTests
         ];
 
         _productRepositoryMock
-                .Setup(r => r.GetAllIncludeAsync(cancellationToken))
+                .Setup(r => r.GetAllAsync(cancellationToken))
                 .ReturnsAsync(products);
 
         var query = new GetAllProductQuery();

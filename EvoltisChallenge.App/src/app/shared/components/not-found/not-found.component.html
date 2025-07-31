@@ -1,1 +1,29 @@
-<p>not-found works!</p>
+<div class="card">
+  <div class="not-found-content">
+    <div class="icon-container">
+      <i class="pi pi-exclamation-triangle" style="font-size: 4rem; color: #f39c12;"></i>
+    </div>
+    
+    <h1>404 - Página no encontrada</h1>
+    
+    <p class="description">
+      Lo sentimos, la página que estás buscando no existe o ha sido movida.
+    </p>
+    
+    <div class="actions">
+      <p-button 
+        icon="pi pi-home" 
+        label="Ir al inicio" 
+        class="p-button-primary"
+        routerLink="/">
+      </p-button>
+      
+      <p-button 
+        icon="pi pi-arrow-left" 
+        label="Volver atrás" 
+        class="p-button-secondary ml-2"
+        (click)="goBack()">
+      </p-button>
+    </div>
+  </div>
+</div>

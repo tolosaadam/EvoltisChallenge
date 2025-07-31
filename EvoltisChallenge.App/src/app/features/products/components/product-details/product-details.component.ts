@@ -15,13 +15,7 @@ export class ProductDetailsComponent implements OnInit {
     private productService: ProductService) { }
 
   ngOnInit(): void {
-    console.log('📦 Product detail cargado');
     const id = this.route.snapshot.paramMap.get('id');
-
-    if (!id) {
-      console.warn('No ID param found in URL');
-      return; // No hacer nada
-    }
 
     if (id) {
       this.productService.getById(id).subscribe({

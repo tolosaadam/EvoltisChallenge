@@ -12,7 +12,7 @@ export class ProductEffects {
 
     loadProducts$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(ProductActions.loadProductsRequest),
+            ofType(ProductActions.loadProducts),
             exhaustMap(() =>
                 this.productService.getAll()
                     .pipe(
@@ -25,7 +25,7 @@ export class ProductEffects {
 
     loadProductById$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(ProductActions.loadProductByIdRequest),
+            ofType(ProductActions.loadProductById),
             exhaustMap((action) =>
                 this.productService.getById(action.id)
                     .pipe(
@@ -38,7 +38,7 @@ export class ProductEffects {
 
     createProduct$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(ProductActions.createProductRequest),
+            ofType(ProductActions.createProduct),
             exhaustMap((action) =>
                 this.productService.create(action.product)
                     .pipe(
@@ -51,7 +51,7 @@ export class ProductEffects {
 
     updateProduct$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(ProductActions.updateProductRequest),
+            ofType(ProductActions.updateProduct),
             exhaustMap((action) =>
                 this.productService.update(action.id, action.product)
                     .pipe(
@@ -64,7 +64,7 @@ export class ProductEffects {
 
     deleteProduct$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(ProductActions.deleteProductRequest),
+            ofType(ProductActions.deleteProduct),
             exhaustMap((action) =>
                 this.productService.delete(action.id)
                     .pipe(

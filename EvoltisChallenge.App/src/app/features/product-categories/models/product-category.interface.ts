@@ -3,3 +3,9 @@ export interface ProductCategory {
     name: string;
     description?: string;
 }
+
+export interface ProductCategoryState {
+  categories: ProductCategory[];
+  loading: boolean;
+  error?: any;
+}

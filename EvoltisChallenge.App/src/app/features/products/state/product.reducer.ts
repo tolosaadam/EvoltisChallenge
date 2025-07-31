@@ -12,7 +12,7 @@ export const _productReducer = createReducer(
     initialState,
 
     // load products.
-    on(ProductActions.loadProductsRequest, state => ({
+    on(ProductActions.loadProducts, state => ({
         ...state,
         loading: true
     })),
@@ -32,7 +32,7 @@ export const _productReducer = createReducer(
 
 
     // load product by id.
-    on(ProductActions.loadProductByIdRequest, state => ({
+    on(ProductActions.loadProductById, state => ({
         ...state,
         loading: true
     })),
@@ -54,7 +54,7 @@ export const _productReducer = createReducer(
 
 
     // create product.
-    on(ProductActions.createProductRequest, state => ({
+    on(ProductActions.createProduct, state => ({
         ...state,
         loading: true
     })),
@@ -74,7 +74,7 @@ export const _productReducer = createReducer(
 
 
     // update product.
-    on(ProductActions.updateProductRequest, state => ({
+    on(ProductActions.updateProduct, state => ({
         ...state,
         loading: true
     })),
@@ -94,7 +94,7 @@ export const _productReducer = createReducer(
 
 
     // delete product.
-    on(ProductActions.deleteProductRequest, state => ({
+    on(ProductActions.deleteProduct, state => ({
         ...state,
         loading: true
     })),

@@ -1,0 +1,10 @@
+<h2>Detalles del producto</h2>
+<div *ngIf="product; else loading">
+  <p><strong>ID:</strong> {{ product.id }}</p>
+  <p><strong>Nombre:</strong> {{ product.name }}</p>
+  <p><strong>Descripción:</strong> {{ product.description }}</p>
+  <p><strong>Precio:</strong> ${{ product.price }}</p>
+</div>
+<ng-template #loading>
+  <p>Cargando producto...</p>
+</ng-template>

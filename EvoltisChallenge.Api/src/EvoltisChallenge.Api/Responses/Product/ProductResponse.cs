@@ -7,5 +7,5 @@ public record ProductResponse(
     string Name,
     string Description,
     double Price,
-    ProductCategoryResponse Category
+    Guid ProductCategoryId
 );

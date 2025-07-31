@@ -1,0 +1,90 @@
+<p-dialog 
+  [header]="(isEditMode$ | async) ? 'Editar Producto' : 'Crear Producto'"
+  [visible]="(modalVisible$ | async) || false"
+  (visibleChange)="onVisibleChange($event)"
+  [modal]="true"
+  [closable]="false"
+  [style]="{width: '500px'}">
+
+  <div *ngIf="productForm$ | async as form">
+    
+    <!-- Nombre -->
+    <div class="field">
+      <label for="name">Nombre *</label>
+      <input 
+        pInputText 
+        id="name" 
+        [ngrxFormControlState]="form.controls.name"
+        placeholder="Ingrese el nombre del producto" />
+      <small class="p-error" *ngIf="form.controls.name.isInvalid && (form.controls.name.isTouched || form.controls.name.isDirty)">
+        El nombre es requerido
+      </small>
+    </div>
+
+    <!-- Descripción -->
+    <div class="field">
+      <label for="description">Descripción *</label>
+      <textarea 
+        pInputTextarea 
+        id="description" 
+        [ngrxFormControlState]="form.controls.description"
+        rows="3"
+        placeholder="Ingrese la descripción del producto">
+      </textarea>
+      <small class="p-error" *ngIf="form.controls.description.isInvalid && form.controls.description.isTouched">
+        La descripción es requerida
+      </small>
+    </div>
+
+    <!-- Precio -->
+    <div class="field">
+      <label for="price">Precio *</label>
+      <p-inputNumber
+        id="price"
+        [ngrxFormControlState]="form.controls.price"
+        mode="currency"
+        currency="USD"
+        locale="en-US"
+        [min]="0.01"
+        placeholder="0.00">
+      </p-inputNumber>
+      <small class="p-error" *ngIf="form.controls.price.isInvalid && form.controls.price.isTouched">
+        El precio debe ser mayor a 0
+      </small>
+    </div>
+
+    <!-- Categoría -->
+    <div class="field">
+      <label for="category">Categoría *</label>
+      <p-dropdown
+        id="category"
+        [ngrxFormControlState]="form.controls.productCategoryId"
+        [options]="(categories$ | async) || []"
+        optionLabel="name"
+        optionValue="id"
+        placeholder="Seleccione una categoría"
+        appendTo="body">
+      </p-dropdown>
+      <small class="p-error" *ngIf="form.controls.productCategoryId.isInvalid && form.controls.productCategoryId.isTouched">
+        Debe seleccionar una categoría
+      </small>
+    </div>
+
+    <div class="form-actions">
+      <p-button 
+        icon="pi pi-times" 
+        label="Cancelar" 
+        class="p-button-text cancel-button"
+        (click)="onCancel()">
+      </p-button>
+      <p-button 
+        icon="pi pi-check" 
+        [label]="(isEditMode$ | async) ? 'Actualizar' : 'Crear'"
+        class="p-button-success submit-button"
+        [disabled]="!(isFormValid$ | async)"
+        (click)="onSubmit()">
+      </p-button>
+    </div>
+
+  </div>
+</p-dialog>

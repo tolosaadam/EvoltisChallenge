@@ -6,6 +6,7 @@ import * as ProductSelectors from '../../state/product.selectors';
 import { deleteProduct } from '../../state/product.actions';
 import { ProductWithCategory } from '../../models/product.interface';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import * as ProductFormActions from '../product-form/state/product-form.actions';
 
 @Component({
   selector: 'app-product-table',
@@ -16,16 +17,13 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 export class ProductTableComponent implements OnInit {
   productsWithCategory$!: Observable<ProductWithCategory[]>;
   loading$!: Observable<boolean>;
-  
-  showFormDialog: boolean = false;
-  selectedProduct: ProductWithCategory | null = null;
 
   constructor(
     private store: Store,
     private router: Router,
     private confirmationService: ConfirmationService,
     private messageService: MessageService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.productsWithCategory$ = this.store.pipe(select(ProductSelectors.selectProductsWithCategory));
@@ -36,14 +34,12 @@ export class ProductTableComponent implements OnInit {
     this.router.navigate(['/products', id]);
   }
 
-  onAdd(): void {
-    this.selectedProduct = null;
-    this.showFormDialog = true;
+  onAdd() {
+    this.store.dispatch(ProductFormActions.openCreateProductForm());
   }
 
-  onEdit(product: ProductWithCategory): void {
-    this.selectedProduct = product;
-    this.showFormDialog = true;
+  onEdit(product: ProductWithCategory) {
+    this.store.dispatch(ProductFormActions.openEditProductForm({ product: product }));
   }
 
   onDelete(product: ProductWithCategory): void {

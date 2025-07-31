@@ -10,6 +10,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { _productReducer } from './state/product.reducer';
 import { ProductEffects } from './state/product.effects';
+import { _productFormReducer } from './components/product-form/state/product-form.reducer';
 import { ProductCategoryModule } from '../product-categories/product-category.module';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -37,6 +38,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
         ProductRoutingModule,
         ProductCategoryModule,
         StoreModule.forFeature('products', _productReducer),
+        StoreModule.forFeature('productForm', _productFormReducer),
         EffectsModule.forFeature([ProductEffects]),
         TableModule,
         ButtonModule,

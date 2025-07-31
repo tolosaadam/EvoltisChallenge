@@ -1,5 +1,6 @@
+import { selectAllProductCategories } from '../../product-categories/state/product-category.selectors';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ProductState } from '../models/product.interface';
+import { ProductState, ProductWithCategory } from '../models/product.interface';
 
 export const selectProductState = createFeatureSelector<ProductState>('products');
 
@@ -21,4 +22,19 @@ export const selectProductsError = createSelector(
 export const selectProductById = (id: string) => createSelector(
     selectAllProducts,
     (products) => products.find(product => product.id === id)
+);
+
+export const selectAllProductsWithCategory = createSelector(
+    selectAllProducts,
+    selectAllProductCategories,
+    (products, categories): ProductWithCategory[] =>
+        products.map(({ productCategoryId, ...rest }) => ({
+            ...rest,
+            category: categories.find(cat => cat.id === productCategoryId)
+        }))
+);
+
+export const selectProductWithCategoryById = (id: string) => createSelector(
+    selectAllProductsWithCategory,
+    (productsWithCat) => productsWithCat.find(pwc => pwc.id === id)
 );

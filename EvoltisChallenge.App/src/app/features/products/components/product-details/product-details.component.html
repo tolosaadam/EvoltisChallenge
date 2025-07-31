@@ -1,10 +1,11 @@
 <h2>Detalles del producto</h2>
-<div *ngIf="product; else loading">
+<div *ngIf="productWithCategory$ | async as product; else notFound">
   <p><strong>ID:</strong> {{ product.id }}</p>
   <p><strong>Nombre:</strong> {{ product.name }}</p>
   <p><strong>Descripción:</strong> {{ product.description }}</p>
   <p><strong>Precio:</strong> ${{ product.price }}</p>
+  <p><strong>Categoría:</strong> {{ product.category?.name }}</p>
 </div>
-<ng-template #loading>
-  <p>Cargando producto...</p>
+<ng-template #notFound>
+  <p>Producto no encontrado</p>
 </ng-template>

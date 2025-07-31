@@ -17,3 +17,8 @@ export const selectProductCategoriesError = createSelector(
     selectProductCategoryState,
     (state) => state.error
 );
+
+export const selectProductCategoryById = (id: string) => createSelector(
+    selectAllProductCategories,
+    (categories) => categories.find(category => category.id === id)
+);

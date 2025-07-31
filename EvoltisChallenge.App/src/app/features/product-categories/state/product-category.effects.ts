@@ -6,17 +6,17 @@ import { ProductCategoryService } from '../services/product-category.service';
 
 @Injectable()
 export class ProductCategoryEffects {
-  loadProductCategories$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(ProductCategoryActions.loadProductCategories),
-      exhaustMap(() =>
-        this.productCategoryService.getAll().pipe(
-          map(categories => ProductCategoryActions.loadProductCategoriesSuccess({ categories })),
-          catchError(error => of(ProductCategoryActions.loadProductCategoriesFailure({ error })))
+    loadProductCategories$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ProductCategoryActions.loadProductCategories),
+            exhaustMap(() =>
+                this.productCategoryService.getAll().pipe(
+                    map(categories => ProductCategoryActions.loadProductCategoriesSuccess({ categories })),
+                    catchError(error => of(ProductCategoryActions.loadProductCategoriesFailure({ error })))
+                )
+            )
         )
-      )
-    )
-  );
+    );
 
-  constructor(private actions$: Actions, private productCategoryService: ProductCategoryService) {}
+    constructor(private actions$: Actions, private productCategoryService: ProductCategoryService) { }
 }

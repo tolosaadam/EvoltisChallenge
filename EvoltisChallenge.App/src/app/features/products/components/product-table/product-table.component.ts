@@ -5,14 +5,14 @@ import { Observable } from 'rxjs';
 import * as ProductSelectors from '../../state/product.selectors';
 import { deleteProduct } from '../../state/product.actions';
 import { ProductWithCategory } from '../../models/product.interface';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import * as ProductFormActions from '../product-form/state/product-form.actions';
 
 @Component({
   selector: 'app-product-table',
   templateUrl: './product-table.component.html',
   styleUrls: ['./product-table.component.scss'],
-  providers: [ConfirmationService, MessageService]
+  providers: [ConfirmationService]
 })
 export class ProductTableComponent implements OnInit {
   productsWithCategory$!: Observable<ProductWithCategory[]>;
@@ -21,8 +21,7 @@ export class ProductTableComponent implements OnInit {
   constructor(
     private store: Store,
     private router: Router,
-    private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit(): void {
@@ -52,11 +51,6 @@ export class ProductTableComponent implements OnInit {
       acceptButtonStyleClass: 'p-button-danger',
       accept: () => {
         this.store.dispatch(deleteProduct({ id: product.id }));
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Producto eliminado',
-          detail: `El producto "${product.name}" ha sido eliminado exitosamente`
-        });
       }
     });
   }

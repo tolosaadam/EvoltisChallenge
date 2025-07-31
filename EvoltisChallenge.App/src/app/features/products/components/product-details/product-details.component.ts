@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { ProductWithCategory } from '../../models/product.interface';
 import * as ProductSelectors from '../../state/product.selectors';
 import { deleteProduct } from '../../state/product.actions';
@@ -21,8 +21,7 @@ export class ProductDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private store: Store,
-    private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit(): void {
@@ -48,15 +47,8 @@ export class ProductDetailsComponent implements OnInit {
       rejectLabel: 'Cancelar',
       acceptButtonStyleClass: 'p-button-danger',
       accept: () => {
+        this.router.navigate(['/products']);
         this.store.dispatch(deleteProduct({ id: product.id }));
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Producto eliminado',
-          detail: `El producto "${product.name}" ha sido eliminado exitosamente`
-        });
-        setTimeout(() => {
-          this.router.navigate(['/products']);
-        }, 1500);
       }
     });
   }

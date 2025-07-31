@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { MessageService } from 'primeng/api';
 import * as ProductActions from './product.actions';
-import { catchError, exhaustMap, map, mergeMap, of } from 'rxjs';
+import { catchError, exhaustMap, map, of, tap } from 'rxjs';
 import { ProductService } from '../services/product.service';
 
 @Injectable()
@@ -75,5 +76,71 @@ export class ProductEffects {
         )
     );
 
-    constructor(private actions$: Actions, private productService: ProductService) { }
+    // Effects para notificaciones
+    createProductSuccess$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ProductActions.createProductSuccess),
+            tap(() => {
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Producto creado',
+                    detail: 'El producto ha sido creado exitosamente'
+                });
+            })
+        ),
+        { dispatch: false }
+    );
+
+    updateProductSuccess$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ProductActions.updateProductSuccess),
+            tap(() => {
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Producto actualizado',
+                    detail: 'El producto ha sido actualizado exitosamente'
+                });
+            })
+        ),
+        { dispatch: false }
+    );
+
+    deleteProductSuccess$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ProductActions.deleteProductSuccess),
+            tap(() => {
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Producto eliminado',
+                    detail: 'El producto ha sido eliminado exitosamente'
+                });
+            })
+        ),
+        { dispatch: false }
+    );
+
+    // Effects para errores
+    productFailure$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(
+                ProductActions.createProductFailure,
+                ProductActions.updateProductFailure,
+                ProductActions.deleteProductFailure
+            ),
+            tap(() => {
+                this.messageService.add({
+                    severity: 'error',
+                    summary: 'Error',
+                    detail: 'Ha ocurrido un error. Por favor, inténtalo de nuevo.'
+                });
+            })
+        ),
+        { dispatch: false }
+    );
+
+    constructor(
+        private actions$: Actions,
+        private productService: ProductService,
+        private messageService: MessageService
+    ) { }
 }

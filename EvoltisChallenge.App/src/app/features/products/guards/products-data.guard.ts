@@ -18,8 +18,8 @@ export class ProductsDataGuard implements CanActivate, CanActivateChild {
 
     private checkStoreLoaded(): Observable<boolean> {
         return combineLatest([
-            this.store.pipe(select(ProductSelectors.selectAllProducts)),
-            this.store.pipe(select(ProductCategorySelectors.selectAllProductCategories))
+            this.store.pipe(select(ProductSelectors.selectProducts)),
+            this.store.pipe(select(ProductCategorySelectors.selectProductCategories))
         ]).pipe(
             take(1),
             switchMap(([products, categories]) => {
@@ -37,12 +37,10 @@ export class ProductsDataGuard implements CanActivate, CanActivateChild {
                         this.store.dispatch(ProductCategoryActions.loadProductCategories());
                     }
 
-                    // Espera a que ambos terminen de cargar
-                    return combineLatest([
-                        this.store.pipe(select(ProductSelectors.selectProductsLoading)),
-                        this.store.pipe(select(ProductCategorySelectors.selectProductCategoriesLoading))
-                    ]).pipe(
-                        filter(([productsLoading, categoriesLoading]) => !productsLoading && !categoriesLoading),
+                    // Espera a que ambos terminen de cargar usando el selector combinado
+                    return this.store.pipe(
+                        select(ProductSelectors.selectProductsAndCategoriesLoading),
+                        filter(loading => !loading), // Cuando ya no está cargando
                         take(1),
                         tap(() => this.loadingService.setLoading(false)),
                         switchMap(() => of(true))

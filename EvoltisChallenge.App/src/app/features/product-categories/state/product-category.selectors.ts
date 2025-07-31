@@ -3,7 +3,7 @@ import { ProductCategoryState } from '../models/product-category.interface';
 
 export const selectProductCategoryState = createFeatureSelector<ProductCategoryState>('productCategories');
 
-export const selectAllProductCategories = createSelector(
+export const selectProductCategories = createSelector(
     selectProductCategoryState,
     (state) => state.categories
 );
@@ -19,6 +19,6 @@ export const selectProductCategoriesError = createSelector(
 );
 
 export const selectProductCategoryById = (id: string) => createSelector(
-    selectAllProductCategories,
+    selectProductCategories,
     (categories) => categories.find(category => category.id === id)
 );

@@ -4,8 +4,14 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 @NgModule({
-    declarations: [NotFoundComponent, LoadingSpinnerComponent],
+    declarations: [
+        NotFoundComponent, 
+        LoadingSpinnerComponent
+    ],
     imports: [CommonModule],
-    exports: [NotFoundComponent, LoadingSpinnerComponent]
+    exports: [
+        NotFoundComponent, 
+        LoadingSpinnerComponent,
+    ]
 })
 export class SharedModule { }

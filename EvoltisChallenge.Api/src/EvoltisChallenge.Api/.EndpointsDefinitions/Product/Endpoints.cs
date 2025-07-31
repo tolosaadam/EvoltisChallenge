@@ -42,7 +42,7 @@ public class Endpoints
     {
         var command = autoMapper.Map<CreateProductCommand>(request);
         var result = await mediator.Send(command, cancellationToken);
-        return Results.Created($"/products/{result}", new { id = result });
+        return Results.Created($"/products/{result}", result);
     }
 
     internal static async Task<IResult> Update(
